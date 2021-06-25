@@ -13,6 +13,8 @@ socket.on('message', (message)=>{
 chatForm.addEventListener('submit', (e)=>{
     e.preventDefault();
     const msg = e.target.elements.msg.value;
+    e.target.elements.msg.value='';
+    e.target.elements.msg.focus();
     socket.emit('chatMessage',msg);
 });
 
