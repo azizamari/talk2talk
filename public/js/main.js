@@ -1,21 +1,24 @@
 const chatForm=document.querySelector('#chat-form');
 const socket = io();
+let chat=document.querySelector('.chat');
 
 socket.on('message', (message)=>{
     console.log(message);
     outputMessage(message);
+
+    chat.scrollTop=chat.scrollHeight;
+    
 });
 
 chatForm.addEventListener('submit', (e)=>{
     e.preventDefault();
     const msg = e.target.elements.msg.value;
-
     socket.emit('chatMessage',msg);
 });
 
 function outputMessage(message){
     const paragraph=document.createElement('p');
     paragraph.innerHTML=message;
-    const messages=document.querySelector('.chat');
-    messages.appendChild(paragraph);
+    const chat=document.querySelector('.chat');
+    chat.appendChild(paragraph);
 }
