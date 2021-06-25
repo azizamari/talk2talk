@@ -3,6 +3,7 @@ const socket = io();
 
 socket.on('message', (message)=>{
     console.log(message);
+    outputMessage(message);
 });
 
 chatForm.addEventListener('submit', (e)=>{
@@ -11,3 +12,10 @@ chatForm.addEventListener('submit', (e)=>{
 
     socket.emit('chatMessage',msg);
 });
+
+function outputMessage(message){
+    const paragraph=document.createElement('p');
+    paragraph.innerHTML=message;
+    const messages=document.querySelector('.chat');
+    messages.appendChild(paragraph);
+}
