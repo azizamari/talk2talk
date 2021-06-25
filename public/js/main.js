@@ -20,7 +20,7 @@ chatForm.addEventListener('submit', (e)=>{
 
 function outputMessage(message){
     const paragraph=document.createElement('p');
-    paragraph.innerHTML=message;
+    paragraph.innerHTML=`${message.username} at ${message.time}: ${message.text}`;
     const chat=document.querySelector('.chat');
     chat.appendChild(paragraph);
 }
