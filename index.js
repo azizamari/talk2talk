@@ -3,6 +3,7 @@ const path =require('path');
 const express =require('express');
 const socketio=require('socket.io');
 const formatMessage=require('./utils/messages');
+const authRouter=require('./router/auth');
 
 const app = express();
 const server = http.createServer(app);
@@ -20,7 +21,7 @@ io.on('connection',socket=>{
         io.emit('message',formatMessage('USER',msg));
     });
 });
-
+app.use('',authRouter)
 const PORT=process.env.PORT || 3000;
 server.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}`);
