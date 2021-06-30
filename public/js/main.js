@@ -1,6 +1,8 @@
 const chatForm=document.querySelector('#chat-form');
 const socket = io();
-let chat=document.querySelector('.chat');
+
+const chat=document.querySelector('.chat');
+const {user}=Qs.parse(location.search,{ignoreQueryPrefix: true});
 
 socket.on('message', (message)=>{
     console.log(message);
@@ -15,7 +17,7 @@ chatForm.addEventListener('submit', (e)=>{
     const msg = e.target.elements.msg.value;
     e.target.elements.msg.value='';
     e.target.elements.msg.focus();
-    socket.emit('chatMessage',msg);
+    socket.emit('chatMessage',msg,user);
 });
 
 function outputMessage(message){

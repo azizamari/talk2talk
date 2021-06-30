@@ -10,6 +10,17 @@ const server = http.createServer(app);
 const io=socketio(server);
 
 app.use(express.static(path.join(__dirname,'public')));
+app.use(express.urlencoded({extended:true}))
+
+app.get('/',(req, res)=>{
+    if(req.query.user !==undefined){
+        res.sendFile(path.join(__dirname,'public','talk.html'));
+    }
+    else{
+        res.redirect('/login');
+    }
+});
+
 io.on('connection',socket=>{ 
     socket.emit('message', formatMessage('talk2talk admin', 'Welcome to talk2talk'));
     socket.broadcast.emit('message', formatMessage('talk2talk admin', 'A new user has joined the chat'));
@@ -17,10 +28,11 @@ io.on('connection',socket=>{
     socket.on('disconnect',()=>{
         io.emit('message', formatMessage('talk2talk admin', 'A user has left the chat.'));
     });
-    socket.on('chatMessage',(msg)=>{
-        io.emit('message',formatMessage('USER',msg));
+    socket.on('chatMessage',(msg,user)=>{
+        io.emit('message',formatMessage(user,msg));
     });
-});
+}); 
+
 app.use('',authRouter)
 const PORT=process.env.PORT || 3000;
 server.listen(PORT, ()=>{
