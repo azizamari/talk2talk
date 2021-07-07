@@ -6,13 +6,27 @@ const socketio=require('socket.io');
 const formatMessage=require('./utils/messages');
 const authRouter=require('./router/auth');
 
+var SequelizeStore = require("connect-session-sequelize")(session.Store);
+const Sequelize=require('sequelize');
+const sequelize=require('./utils/database');
+const message=require('./models/message');
+
+
 const app = express();
 const server = http.createServer(app);
 const io=socketio(server);
 
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended:true}))
-app.use(session({secret:'FASf56dsfdsa4d84fsD',resave:false, saveUninitialized:false}));
+const myStore=new SequelizeStore({
+    db:sequelize,
+});
+app.use(session({
+    secret:'FASf56dsfdsa4d84fsD',
+    resave:false, 
+    saveUninitialized:false,
+    store:myStore,
+}));
 
 app.get('/',(req, res)=>{
     console.log(req.get('cookie'));
@@ -36,6 +50,10 @@ io.on('connection',socket=>{
         io.emit('message',formatMessage(user,msg));
     });
 }); 
+
+sequelize.sync().then(x=>{
+    // console.log(x);
+}).catch(error=>{console.log(error)});
 
 const PORT=process.env.PORT || 3000;
 server.listen(PORT, ()=>{
