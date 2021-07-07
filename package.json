@@ -9,6 +9,7 @@
   "author": "Aziz Amari",
   "license": "ISC",
   "dependencies": {
+    "connect-pg-simple": "^6.2.1",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "moment": "^2.29.1",

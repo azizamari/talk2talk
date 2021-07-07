@@ -1,6 +1,7 @@
 const http =require('http');
 const path =require('path');
 const express =require('express');
+const session=require('express-session');
 const socketio=require('socket.io');
 const formatMessage=require('./utils/messages');
 const authRouter=require('./router/auth');
@@ -11,10 +12,11 @@ const io=socketio(server);
 
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended:true}))
+app.use(session({secret:'FASf56dsfdsa4d84fsD',resave:false, saveUninitialized:false}));
 
 app.get('/',(req, res)=>{
     console.log(req.get('cookie'));
-    if(req.query.user !==undefined){
+    if(req.session.isLoggedIn===true){
         res.sendFile(path.join(__dirname,'public','talk.html'));
     }
     else{

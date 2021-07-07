@@ -2,7 +2,7 @@ const path=require('path');
 
 exports.postLogin=(req,res)=>{
     console.log(req.body);
-    res.setHeader('Set-Cookie','loggedIn=true');
+    req.session.isLoggedIn=true;
     res.redirect('/');
 }
 exports.getLogin=(req,res)=>{
