@@ -7,9 +7,16 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="/" method="GET" >
-        <input type="text" name="user" >
-        <input type="submit" value="login">
+    <form action="/login" method="POST" >
+        <div>
+            <label for="email">Email</label>
+            <input type="text" name="email">
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" name="password" >
+        </div>
+        <input type="submit" value="Login">
     </form>
 </body>
 </html>

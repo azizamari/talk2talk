@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended:true}))
 
 app.get('/',(req, res)=>{
+    console.log(req.get('cookie'));
     if(req.query.user !==undefined){
         res.sendFile(path.join(__dirname,'public','talk.html'));
     }
@@ -20,6 +21,7 @@ app.get('/',(req, res)=>{
         res.redirect('/login');
     }
 });
+app.use('/',authRouter)
 
 io.on('connection',socket=>{ 
     socket.emit('message', formatMessage('talk2talk admin', 'Welcome to talk2talk'));
@@ -33,7 +35,6 @@ io.on('connection',socket=>{
     });
 }); 
 
-app.use('',authRouter)
 const PORT=process.env.PORT || 3000;
 server.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}`);

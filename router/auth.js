@@ -1,8 +1,8 @@
 const router=require('express').Router();
-const path=require('path');
+const authController=require('../controllers/auth');
 
-router.get('/login',(req,res)=>{
-    res.sendFile(path.join(__dirname,'..','public','login.html'));
-});
+router.get('/login',authController.getLogin);
+
+router.post('/login',authController.postLogin);
 
 module.exports = router;
