@@ -25,6 +25,7 @@
 .sidebar__search{
     display:flex;
     align-items:center;
+    /* background-color:#2F2E42;  */
     height:39px;
     padding:10px;
 }
@@ -45,6 +46,10 @@
 .sidebar__searchContainer >input{
     border:none;
     margin-left: 10px;
+    background-color: inherit;
+    outline: none;
+    color:white;
+    caret-color:white;
 }
 
 .icon__white{
