@@ -8,3 +8,8 @@ exports.postLogin=(req,res)=>{
 exports.getLogin=(req,res)=>{
     res.sendFile(path.join(__dirname,'..','public','login.html'));
 }
+exports.postLogout=(req,res)=>{
+    req.session.destroy(()=>{
+        res.redirect('/login')
+    })
+}
