@@ -8,7 +8,12 @@ function SidebarChat({addNewChat}) {
         setSeed(Math.floor(Math.random()*1000));
     },[]);
 
-    const createChat=()=>{}
+    const createChat=()=>{
+        const roomName=prompt("Enter chat name");
+        if(roomName){
+            // Add room using backend api
+        }
+    };
 
     return  !addNewChat ?(
         <div className="sidebarChat">
