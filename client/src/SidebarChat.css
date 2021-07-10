@@ -8,3 +8,11 @@
 .sidebarChat:hover{
     background-color:#16172C;
 }
+.sidebarChat__info >h2{
+    font-size:16px;
+    margin-bottom: 8px;
+}
+
+.sidebarChat__info{
+    margin-left:15px;
+}
