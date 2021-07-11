@@ -46,14 +46,19 @@
     color:#fff;
     border-radius: 10px;
     width:fit-content;
-    margin-bottom:15px;
+    margin-bottom:20px;
 }
 .chat__name{
     position: absolute; 
-    top:-16px;
-    font-size:x-small;
+    top:-18px;
+    font-size:small;
+    color:#3DAC4B;
 }
 .chat__timestamp{
     margin-left: 10px;
     font-size:x-small;
+}
+.chat__receiver{
+    background-color:#3DAC4B;
+    margin-left: auto;
 }
