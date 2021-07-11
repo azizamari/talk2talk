@@ -62,3 +62,37 @@
     background-color:#3DAC4B;
     margin-left: auto;
 }
+ 
+.chat__footer{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height:62px;
+    border-top:1px solid #3DAC4B;
+    background-color:#16172C;
+}
+
+.chat__footer >form{
+    flex:1;
+    display: flex;
+    justify-content: space-around;
+}
+
+.chat__footer >form >input{
+    flex:.9;
+    border-radius: 30px;
+    padding:8px;
+    border:none;
+    background-color: #2F2E42;
+    outline: none;
+    color:white;
+    font-size:medium;
+    caret-color:white;
+}
+
+.chat__footer >form >button{
+    background: transparent;
+    outline : none;
+    border:none;
+    color:#3DAC4B;
+}
