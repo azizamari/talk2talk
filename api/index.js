@@ -55,7 +55,7 @@ sequelize.sync().then(x=>{
     // console.log(x);
 }).catch(error=>{console.log(error)});
 
-const PORT=process.env.PORT || 3000;
+const PORT=process.env.PORT || 4000;
 server.listen(PORT, ()=>{
     console.log(`listening on port ${PORT}`);
 });
