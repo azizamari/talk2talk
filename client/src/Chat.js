@@ -6,13 +6,22 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SendIcon from '@material-ui/icons/Send';
 import './Chat.css';
 
-function Chat() {
+function Chat(props) {
 
     const [seed,setSeed]=useState('');
     useEffect(()=>{
         setSeed(Math.floor(Math.random()*1000));
     },[]);
-
+    var chatBubbles=[]
+    for(let message of props.chat){
+        chatBubbles.push(
+            <div className={`chat__message ${true && 'chat__receiver'}`}>
+                <span className="chat__name">{message.user}</span>
+                {message.msg}
+                <span className="chat__timestamp">{message.timeStamp}</span>
+            </div>
+        );
+    }
     return (
         <div className="chat">
             <div className="chat__header">
@@ -34,16 +43,7 @@ function Chat() {
                 </div>
             </div>
             <div className="chat__body">
-                <div className="chat__message">
-                    <span className="chat__name">Aziz Amari</span>
-                    Hey guys
-                    <span className="chat__timestamp">3:52pm</span>
-                </div>
-                <div className={`chat__message ${true && 'chat__receiver'}`}>
-                    <span className="chat__name">Aziz Amari</span>
-                    Sba77 lkhirrrrrrrrrr
-                    <span className="chat__timestamp">00:55am</span>
-                </div>
+                {chatBubbles}
             </div>
             <div className="chat__footer">
                 <form>
