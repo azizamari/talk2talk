@@ -5,6 +5,7 @@ const session=require('express-session');
 const socketio=require('socket.io');
 const formatMessage=require('./utils/messages');
 const authRouter=require('./router/auth');
+var cors = require('cors');
 
 var SequelizeStore = require("connect-session-sequelize")(session.Store);
 const Sequelize=require('sequelize');
@@ -18,6 +19,7 @@ const io=socketio(server);
 
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended:true}))
+app.use(cors());
 const myStore=new SequelizeStore({
     db:sequelize,
 });
@@ -40,6 +42,7 @@ app.get('/',(req, res)=>{
 app.use('/',authRouter)
 
 io.on('connection',socket=>{ 
+    console.log("user")
     socket.emit('message', formatMessage('talk2talk admin', 'Welcome to talk2talk'));
     socket.broadcast.emit('message', formatMessage('talk2talk admin', 'A new user has joined the chat'));
 
