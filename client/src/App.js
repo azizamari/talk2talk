@@ -4,8 +4,13 @@ import Sidebar from './Sidebar';
 import Chat from './Chat';
 import socketClient  from "socket.io-client";
 
-const SERVER = "http://localhost:8080/";
+const SERVER = "http://127.0.0.1:8080";
 function App() {
+    var socket = socketClient(SERVER);
+    socket.on('connection', () => {
+        console.log(`I'm connected with the back-end`);
+    });
+    socket.emit('aaa','aaaaa')
 
     const [chat,setChat]=useState('');
     useEffect(()=>{
@@ -17,18 +22,6 @@ function App() {
         }]);
     },[]);
 
-    var socket = socketClient(SERVER);
-    socket.on('connection',()=>{
-        console.log("I'm in")
-    })
-    socket.on('message', (message)=>{
-        console.log(message);
-        // outputMessage(message);
-    
-        // chat.scrollTop=chat.scrollHeight;
-        
-    });
-    socket.emit('chatMessage',"Ayoo","WEEb")
     return (
         <div className="app">
             <div className="app__body">
