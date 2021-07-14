@@ -1,7 +1,13 @@
+const formatMessage=require('./utils/messages');
 const app = require('express')();
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
 const cors=require('cors');
+const io = require('socket.io')(server,{
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+    }
+});
 
 app.use(cors());
 
@@ -11,9 +17,9 @@ server.listen(PORT, () => {
 });
 
 io.on('connection', socket =>{
-    console.log('New client connected');
-    socket.emit('connection','HALLO')
-    socket.on('aaa',msg=>{
-        console.log(msg)
-    })
+    socket.broadcast.emit('message', formatMessage('talk2talk admin', 'A new user has joined the chat'));
+
+    socket.on('chatMessage',(msg,user)=>{
+        io.emit('chatMessage',formatMessage(user,msg));
+    });
 });
