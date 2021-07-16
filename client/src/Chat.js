@@ -4,14 +4,25 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SendIcon from '@material-ui/icons/Send';
+import {socket} from './App';
 import './Chat.css';
 
 function Chat(props) {
+    const [message, setMessage] = useState('')
+
+    function handleSubmit(event){
+        event.preventDefault();
+        event.target.reset();
+        setMessage('');
+        socket.emit('chatMessage',message,'random user')
+    }
 
     const [seed,setSeed]=useState('');
     useEffect(()=>{
         setSeed(Math.floor(Math.random()*1000));
     },[]);
+
+
     var chatBubbles=[]
     for(let message of props.chat){
         chatBubbles.push(
@@ -46,8 +57,8 @@ function Chat(props) {
                 {chatBubbles}
             </div>
             <div className="chat__footer">
-                <form>
-                    <input placeholder="Type a message" type="text" />
+                <form onSubmit={handleSubmit}>
+                    <input onChange={event => setMessage(event.target.value)}  placeholder="Type a message" type="text" />
                     <button>
                         <IconButton>
                             <SendIcon className="icon__green"/>

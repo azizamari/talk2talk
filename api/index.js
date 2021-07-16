@@ -17,9 +17,8 @@ server.listen(PORT, () => {
 });
 
 io.on('connection', socket =>{
-    socket.broadcast.emit('message', formatMessage('talk2talk admin', 'A new user has joined the chat'));
-
+    socket.emit('chatMessage',formatMessage("aziz","uss"));
     socket.on('chatMessage',(msg,user)=>{
-        io.emit('chatMessage',formatMessage(user,msg));
+        socket.emit('chatMessage',formatMessage(user,msg));
     });
 });

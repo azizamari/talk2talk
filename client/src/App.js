@@ -1,35 +1,22 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Sidebar from './Sidebar';
 import Chat from './Chat';
 import { io } from "socket.io-client";
 
-const SERVER = "http://127.0.0.1:8080";
+const SERVER = "http://localhost:8080";
+const socket = io.connect(SERVER);
 function App() {
     
-    const [chat,setChat]=useState('');
-    useEffect(()=>{
-        setChat([{
-            user:"aziz",
-            msg:"Hello",
-            timeStamp:"15:00 am"
-        }]);
-    },[]);
+    const [chat,setChat]=useState([{
+        user:"aziz",
+        msg:"Hello",
+        timeStamp:"15:00 am"
+    }]);
 
-    var socket = io.connect(SERVER);
-    socket.on('connection', () => {
-        console.log(`I'm connected with the back-end`);
-        socket.emit('chatMessage',"heeeey","aziz");
-        socket.emit('chatMessage',"shut up","god");
-    });
     socket.on('chatMessage', (msg) => {
-        setChat([...chat,{
-            user:msg.username,
-            msg:msg.text,
-            timeStamp:msg.time,
-        }]);
+        setChat([...chat,{user:msg.username, msg:msg.text, timeStamp:msg.time}]);
     });
-    console.log(chat);
     return (
         <div className="app">
             <div className="app__body">
@@ -41,5 +28,5 @@ function App() {
         </div>
     );
 }
-
+export {socket};
 export default App;
