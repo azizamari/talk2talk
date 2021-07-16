@@ -8,11 +8,7 @@ const SERVER = "http://localhost:8080";
 const socket = io.connect(SERVER);
 function App() {
     
-    const [chat,setChat]=useState([{
-        user:"aziz",
-        msg:"Hello",
-        timeStamp:"15:00 am"
-    }]);
+    const [chat,setChat]=useState([]);
 
     socket.on('chatMessage', (msg) => {
         setChat([...chat,{user:msg.username, msg:msg.text, timeStamp:msg.time}]);

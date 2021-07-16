@@ -17,8 +17,7 @@ server.listen(PORT, () => {
 });
 
 io.on('connection', socket =>{
-    socket.emit('chatMessage',formatMessage("aziz","uss"));
     socket.on('chatMessage',(msg,user)=>{
-        socket.emit('chatMessage',formatMessage(user,msg));
+        io.emit('chatMessage',formatMessage(user,msg));
     });
 });
