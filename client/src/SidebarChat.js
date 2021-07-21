@@ -12,6 +12,11 @@ function SidebarChat({addNewChat, roomName}) {
         const roomName=prompt("Enter chat name");
         if(roomName){
             // Add room using backend api
+            fetch('http://localhost:8080/rooms', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: roomName })
+            });
         }
     };
 
