@@ -8,7 +8,7 @@ const room=sequelize.define('room',{
         allowNull:false,
         primaryKey:true
     },
-    Name:{
+    name:{
         type:DataTypes.STRING,
         allowNull: false
     }

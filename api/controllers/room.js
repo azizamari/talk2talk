@@ -8,7 +8,7 @@ exports.postNewRoom=(req,res)=>{
           });
           return;
     }
-    Room.create({Name:req.body.name})
+    Room.create({name:req.body.name,senderId:req.body.senderId,receiverId:req.body.receiverId})
     .then(data => {
       res.send(data);
     })

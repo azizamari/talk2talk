@@ -24,7 +24,7 @@ function Sidebar(){
     var sideBarRooms=[]
     for(let room of rooms){
         sideBarRooms.push(
-            <SidebarChat roomName={room.Name}/>
+            <SidebarChat roomName={room.name}/>
         );
     }
 
