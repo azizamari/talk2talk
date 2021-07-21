@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use('/room',roomRouter);
+app.use('/rooms',roomRouter);
 
 
 const PORT = process.env.PORT || 8080;
