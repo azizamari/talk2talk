@@ -1,5 +1,5 @@
 const sequelize = require('../utils/database');
-const room = require('../models/room');
+const Room = require('../models/room');
 
 exports.postNewRoom=(req,res)=>{
     if(!req.body.name){
@@ -8,7 +8,7 @@ exports.postNewRoom=(req,res)=>{
           });
           return;
     }
-    room.create({Name:req.body.name})
+    Room.create({Name:req.body.name})
     .then(data => {
       res.send(data);
     })
@@ -20,3 +20,15 @@ exports.postNewRoom=(req,res)=>{
     });
 
 };
+
+exports.getRooms=(req,res)=>{
+    Room.findAll().then(data=>{
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials."
+        });
+      });
+}
