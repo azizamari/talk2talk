@@ -9,7 +9,7 @@ const message=sequelize.define('message',{
         primaryKey:true
     },
     text:{
-        type:DataTypes.TEXT
+        type:DataTypes.STRING
     },
     senderId:{
         type:DataTypes.INTEGER,

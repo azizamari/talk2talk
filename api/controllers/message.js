@@ -1,8 +1,8 @@
 const sequelize = require('../utils/database');
-const Message = require('../models/room');
+const Message = require('../models/message');
 
 exports.postNewMessage=(req,res)=>{
-    Room.create({name:req.body.name,senderId:req.body.senderId,receiverId:req.body.receiverId})
+    Message.create({name:req.body.name,senderId:req.body.senderId,receiverId:req.body.receiverId})
     .then(data => {
       res.send(data);
     })
