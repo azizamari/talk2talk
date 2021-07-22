@@ -38,8 +38,8 @@ function Chat(props) {
             <div className="chat__header">
                 <Avatar src={`https://avatars.dicebear.com/api/identicon/${seed}.svg`}/>
                 <div className="chat__headerInfo">
-                    <h3>Room Name</h3>
-                    <p>Last seen at ...</p>
+                    <h3>Movies</h3>
+                    <p>Last seen at 14:54</p>
                 </div>
                 <div className="chat__headerRight">
                     <IconButton>
